@@ -10,14 +10,32 @@
   <link href="https://smartdisk.github.io/appres-js/appres.min.css" rel="stylesheet">
   <script src="https://smartdisk.github.io/appres-js/appres.min.js"></script>
   <script>
+    window.$appresBinding$ = {};
     function onAppResOptions() {
       return {
         pkey: "HjBKrdl0EdKNN4BEBfc3",
         akey: "0d42929e-a2ef-4f49-a280-f14878278fe6",
         cache: false,
         hash: "md5",
+        langs_all: true,
         langs_selector: {
           langs_button_color: "white"
+        },
+        onReady: function() {
+          console.log(">>> onReady");
+          if(window.$appresBinding$["OnReady"]){
+            window.$appresBinding$["OnReady"].forEach(onReady => {
+              onReady();            
+            });
+          }
+        },
+        onLanguageChange: function() {
+          console.log(">>> onLanguageChange");
+          if(window.$appresBinding$["OnLanguageChange"]){
+            window.$appresBinding$["OnLanguageChange"].forEach(onLanguageChange => {
+              onLanguageChange();            
+            });
+          }
         }
       }
     }
