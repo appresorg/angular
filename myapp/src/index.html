@@ -7,10 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+  <!-- <link href="assets/appres/core/appres.css" rel="stylesheet">
+  <script src="assets/appres/core/appres.js"></script> -->
+
   <link href="https://smartdisk.github.io/appres-js/appres.min.css" rel="stylesheet">
   <script src="https://smartdisk.github.io/appres-js/appres.min.js"></script>
   <script>
-    window.$appresBinding$ = {};
     function onAppResOptions() {
       return {
         pkey: "HjBKrdl0EdKNN4BEBfc3",
@@ -21,21 +23,11 @@
         langs_selector: {
           langs_button_color: "white"
         },
-        onReady: function() {
-          console.log(">>> onReady");
-          if(window.$appresBinding$["OnReady"]){
-            window.$appresBinding$["OnReady"].forEach(onReady => {
-              onReady();            
-            });
-          }
+        onReady: function(sender) {
+          console.log(">>> onReady:" + sender);
         },
-        onLanguageChange: function() {
-          console.log(">>> onLanguageChange");
-          if(window.$appresBinding$["OnLanguageChange"]){
-            window.$appresBinding$["OnLanguageChange"].forEach(onLanguageChange => {
-              onLanguageChange();            
-            });
-          }
+        onLanguageChange: function(sender) {
+          console.log(">>> onLanguageChange:" + sender);
         }
       }
     }
