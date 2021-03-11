@@ -1,6 +1,4 @@
-import { OnDestroy } from '@angular/core';
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { OnInit, OnDestroy, Component, ChangeDetectorRef } from '@angular/core';
 
 declare var $$, $S, $T, $Q: any;
 
@@ -12,32 +10,19 @@ declare var $$, $S, $T, $Q: any;
 export class AppComponent implements OnInit, OnDestroy {
   title = 'myapp';
 
-  onReady = null;
-  onLanguageChange = null;
+  onTranslate = null;
 
-  onAppResTranslate(): void {
-    this.title = $$("myapp");
-  }
-  onAppResInit(): void {
-    const self = this;
-    this.onReady = function(sender) {
-      self.onAppResTranslate();
-    }
-    this.onLanguageChange = function(sender) {
-      self.onAppResTranslate();
-    }
-    $$().addEvent("onReady", this.onReady);
-    $$().addEvent("onLanguageChange", this.onLanguageChange);
-  }
-  onAppResDestroy(): void {
-    $$().removeEvent("onReady", this.onReady);
-    $$().removeEvent("onLanguageChange", this.onLanguageChange);
-  }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.onAppResInit();
+    let self = this;
+    this.onTranslate = function() {
+      self.title = $$("myapp");
+      self.cdr.detectChanges();
+    }
+    $$().addEvent("onTranslate", this.onTranslate);
   }
   ngOnDestroy(): void {
-    this.onAppResDestroy();
+    $$().removeEvent("onTranslate", this.onTranslate);
   }
 }
