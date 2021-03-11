@@ -21,7 +21,11 @@
         hash: "md5",
         langs_all: true,
         langs_selector: {
-          langs_button_color: "white"
+          langs_button_color: "white",
+          langs_button_size: "small",
+          style : {
+            css: {"position": "absolute", "display": "block", "right": "70px", "top": "15px", "z-index": "10000"}
+          }
         },
         onReady: function(sender) {
           console.log(">>> onReady from index.html:" + sender);
